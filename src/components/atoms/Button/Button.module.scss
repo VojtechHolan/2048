@@ -1,4 +1,8 @@
+@import "src/styles/mixins";
+@import "src/styles/variables";
+
 .button {
+  @include transition();
   display: block;
   line-height: 42px;
   height: 40px;
@@ -10,4 +14,8 @@
   text-decoration: none;
   color: #f9f6f2;
   border: none;
+
+  &:hover {
+    background-color: $hover-background-color;
+  }
 }

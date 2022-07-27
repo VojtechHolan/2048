@@ -1,9 +1,18 @@
 @import 'normalize.scss';
 @import 'variables.scss';
 
+* {
+ box-sizing: border-box;
+}
+
 body {
   height: 100vh;
   margin: 0;
   background-color: $background-color;
   font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+  color: $color;
+}
+
+h1 {
+  font-size: 40px;
 }

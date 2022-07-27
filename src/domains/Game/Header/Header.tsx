@@ -1,14 +1,14 @@
 import Button from 'components/atoms/Button/Button'
 
+import { useGameContext } from '../GameContext/useGameContext'
 import classes from './Header.module.scss'
 
-type HeaderProps = {}
-
-export default function Header({}: HeaderProps): JSX.Element {
+export default function Header(): JSX.Element {
+  const { handleStartNewGame } = useGameContext()
   return (
     <section className={classes.header}>
       <h1>2048</h1>
-      <Button title="New Game" onClick={() => console.log('2048 staart')} />
+      <Button title="New Game" onClick={() => handleStartNewGame()} />
     </section>
   )
 }

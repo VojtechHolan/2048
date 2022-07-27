@@ -94,6 +94,9 @@
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
     "react/require-default-props": "off",
-    "no-restricted-exports": "off"
+    "no-restricted-exports": "off",
+    "no-plusplus": "off",
+    "no-restricted-syntax": "off",
+    "no-continue": "off"
   }
 }
