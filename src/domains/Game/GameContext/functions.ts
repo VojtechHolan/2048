@@ -2,6 +2,7 @@ import { Direction } from 'enums/Directive'
 import { getRandomNumberFromRange } from 'services/random'
 
 import { Board } from '../../../types/Board'
+import { BoardResult } from '../../../types/BoardResult'
 
 /**
  * Transform array as following:
@@ -11,10 +12,14 @@ import { Board } from '../../../types/Board'
  * @param row - original row
  * @param direction - direction {LEFT, RIGHT}
  */
-export const calculate = (row: number[], direction: Direction): number[] => {
+export const calculate = (
+  row: number[],
+  direction: Direction
+): { board: number[]; score: number } => {
   const originalRow = direction === Direction.LEFT ? row : row.reverse()
 
   const newRow = []
+  let newScore = 0
   let iterator = 0
 
   // We must iterate through row
@@ -37,7 +42,9 @@ export const calculate = (row: number[], direction: Direction): number[] => {
       // If two boxes have same values merge them
       // And push new value to new row
       if (originalRow[iterator] === originalRow[iterator + offset]) {
-        newRow.push(originalRow[iterator] * 2)
+        const newBoxValue = originalRow[iterator] * 2
+        newScore = newBoxValue
+        newRow.push(newBoxValue)
         iterator += offset
         break
       }
@@ -62,7 +69,10 @@ export const calculate = (row: number[], direction: Direction): number[] => {
   // We compare old and new array and add null at the end of new array
   newRow.push(...Array(originalRow.length - newRow.length).fill(null))
 
-  return direction === Direction.LEFT ? newRow : newRow.reverse()
+  return {
+    board: direction === Direction.LEFT ? newRow : newRow.reverse(),
+    score: newScore,
+  }
 }
 
 /**
@@ -80,15 +90,21 @@ export const transpose = (twoDimensionArray: Board): Board => {
  * @param board - current board
  * @param direction - direction {LEFT, RIGHT}
  */
-export const mergeRow = (board: Board, direction: Direction): Board => {
+export const calculateRow = (
+  board: Board,
+  direction: Direction
+): BoardResult => {
   const newBoard = []
+  let newScore = 0
 
   // Go through all the rows
   for (const originalRow of board) {
-    newBoard.push(calculate(originalRow, direction))
+    const { board, score } = calculate(originalRow, direction)
+    newBoard.push(board)
+    newScore += score
   }
 
-  return newBoard
+  return { board: newBoard, score: newScore }
 }
 
 /**
@@ -96,13 +112,19 @@ export const mergeRow = (board: Board, direction: Direction): Board => {
  * @param board - current board
  * @param direction - direction {UO, DOWN}
  */
-export const mergeColumn = (board: Board, direction: Direction): Board => {
-  const newBoard = mergeRow(
+export const calculateColumn = (
+  board: Board,
+  direction: Direction
+): BoardResult => {
+  const boardResult = calculateRow(
     transpose(board),
     direction === Direction.UP ? Direction.LEFT : Direction.RIGHT
   )
 
-  return transpose(newBoard)
+  return {
+    board: transpose(boardResult.board),
+    score: boardResult.score,
+  }
 }
 
 /**
@@ -110,11 +132,14 @@ export const mergeColumn = (board: Board, direction: Direction): Board => {
  * @param board - current board
  * @param direction - direction {LEFT, RIGHT, UP, DOWN}
  */
-export const generateNewBoard = (board: Board, direction: Direction): Board => {
+export const generateNewBoard = (
+  board: Board,
+  direction: Direction
+): BoardResult => {
   if (direction === Direction.LEFT || direction === Direction.RIGHT) {
-    return mergeRow(board, direction)
+    return calculateRow(board, direction)
   }
-  return mergeColumn(board, direction)
+  return calculateColumn(board, direction)
 }
 
 /**

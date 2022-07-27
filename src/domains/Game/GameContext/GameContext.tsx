@@ -20,6 +20,7 @@ export interface GameProviderType {
   board: Board | null
   handleChange: (direction: Direction) => void
   isInitialStart: boolean
+  currentScore: number
 }
 
 export const GameContext = createContext<GameProviderType | null>(null)
@@ -27,9 +28,11 @@ export const GameContext = createContext<GameProviderType | null>(null)
 export function GameProvider({ children }: GameContextProps): ReactElement {
   const [board, setBoard] = useState<Board | null>(null)
   const [isInitialStart, setIsInitialStart] = useState<boolean>(false)
+  const [currentScore, setCurrentScore] = useState<number>(0)
 
   const handleStartNewGame = useCallback(() => {
     setIsInitialStart(true)
+    setCurrentScore(0)
     const newBoard: Board = [...Array(4).fill(null)].map(() =>
       Array(4).fill(null)
     )
@@ -52,13 +55,14 @@ export function GameProvider({ children }: GameContextProps): ReactElement {
   const handleChange = (direction: Direction): void => {
     if (board) {
       // Generate new board
-      const newBoard = generateNewBoard(board, direction)
+      const { board: newBoard, score } = generateNewBoard(board, direction)
 
       // Find out if user lose
       if (isEndOfGame(newBoard)) {
         setBoard(null)
       } else {
         setBoard(newBoard)
+        setCurrentScore((prev) => prev + score)
         // Generate new box
         // I can imagine better solution for comparison of two 2D arrays...
         if (JSON.stringify(board) !== JSON.stringify(newBoard)) {
@@ -76,8 +80,9 @@ export function GameProvider({ children }: GameContextProps): ReactElement {
       board,
       handleChange,
       isInitialStart,
+      currentScore,
     }),
-    [handleStartNewGame, board, handleChange, isInitialStart]
+    [handleStartNewGame, board, handleChange, isInitialStart, currentScore]
   )
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>

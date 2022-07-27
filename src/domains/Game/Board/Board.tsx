@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import { useArrowsControl } from '../../../hooks/useArrawsControl'
 import Box from '../Box/Box'
 import { useGameContext } from '../GameContext/useGameContext'
