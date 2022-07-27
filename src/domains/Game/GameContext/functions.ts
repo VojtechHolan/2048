@@ -11,7 +11,7 @@ import { Board } from '../../../types/Board'
  * @param row - original row
  * @param direction - direction {LEFT, RIGHT}
  */
-export const calculateRow = (row: number[], direction: Direction): number[] => {
+export const calculate = (row: number[], direction: Direction): number[] => {
   const originalRow = direction === Direction.LEFT ? row : row.reverse()
 
   const newRow = []
@@ -85,7 +85,7 @@ export const mergeRow = (board: Board, direction: Direction): Board => {
 
   // Go through all the rows
   for (const originalRow of board) {
-    newBoard.push(calculateRow(originalRow, direction))
+    newBoard.push(calculate(originalRow, direction))
   }
 
   return newBoard

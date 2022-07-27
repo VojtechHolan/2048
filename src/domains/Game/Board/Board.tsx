@@ -4,6 +4,7 @@ import { useArrowsControl } from '../../../hooks/useArrawsControl'
 import Box from '../Box/Box'
 import { useGameContext } from '../GameContext/useGameContext'
 import classes from './Board.module.scss'
+import BoardTitle from './BoardTitle/BoardTitle'
 
 export default function Board(): JSX.Element {
   const { board, handleChange } = useGameContext()
@@ -11,7 +12,7 @@ export default function Board(): JSX.Element {
 
   return (
     <section className={classes.board}>
-      {board == null && <h2>Click new game button to start game!</h2>}
+      {board == null && <BoardTitle />}
       {board != null && (
         <div className={classes.boxes}>
           {board.map((line) =>
