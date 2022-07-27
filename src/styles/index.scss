@@ -1,0 +1,9 @@
+@import 'normalize.scss';
+@import 'variables.scss';
+
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: $background-color;
+  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+}
