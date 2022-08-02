@@ -1,6 +1,8 @@
 @import "src/styles/mixins";
 @import "src/styles/variables";
 
+$btn-basic-color: #8f7a66;
+
 .button {
   @include transition();
   display: block;
@@ -8,14 +10,27 @@
   height: 40px;
   padding: 0 20px;
   text-align: center;
-  background: #8f7a66;
   border-radius: 3px;
   cursor: pointer;
   text-decoration: none;
-  color: #f9f6f2;
+
   border: none;
 
   &:hover {
     background-color: $hover-background-color;
   }
+
+  &.primary {
+    color: #f9f6f2;
+    background-color: $btn-basic-color;
+  }
+
+  &.secondary {
+    background-color: transparent;
+    color: $btn-basic-color;
+    border: 1px solid $btn-basic-color;
+
+
+  }
 }
+

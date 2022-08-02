@@ -1,0 +1,19 @@
+.initialPage {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.initialPageActions {
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.initialPageButton {
+  margin: 0 7px;
+}

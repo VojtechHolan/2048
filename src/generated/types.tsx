@@ -145,15 +145,15 @@ export type Query = {
   /**  Search for the User item with the matching ID.  */
   User?: Maybe<User>;
   /**  Retrieve the meta-data for the Score list.  */
-  _ScoresMeta?: Maybe<_ListMeta>;
+  _ScoresMeta?: Maybe<ListMeta>;
   /**  Retrieve the meta-data for the User list.  */
-  _UsersMeta?: Maybe<_ListMeta>;
+  _UsersMeta?: Maybe<ListMeta>;
   /**  Perform a meta-query on all Score items which match the where clause.  */
-  _allScoresMeta?: Maybe<_QueryMeta>;
+  _allScoresMeta?: Maybe<QueryMeta>;
   /**  Perform a meta-query on all User items which match the where clause.  */
-  _allUsersMeta?: Maybe<_QueryMeta>;
+  _allUsersMeta?: Maybe<QueryMeta>;
   /**  Retrieve the meta-data for all lists.  */
-  _ksListsMeta?: Maybe<Array<Maybe<_ListMeta>>>;
+  _ksListsMeta?: Maybe<Array<Maybe<ListMeta>>>;
   /**  Search for all Score items which match the where clause.  */
   allScores?: Maybe<Array<Maybe<Score>>>;
   /**  Search for all User items which match the where clause.  */
@@ -175,7 +175,7 @@ export type QueryUserArgs = {
 };
 
 
-export type Query_AllScoresMetaArgs = {
+export type QueryAllScoresMetaArgs = {
   first?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Scalars['String']>;
   search?: InputMaybe<Scalars['String']>;
@@ -185,7 +185,7 @@ export type Query_AllScoresMetaArgs = {
 };
 
 
-export type Query_AllUsersMetaArgs = {
+export type QueryAllUsersMetaArgs = {
   first?: InputMaybe<Scalars['Int']>;
   orderBy?: InputMaybe<Scalars['String']>;
   search?: InputMaybe<Scalars['String']>;
@@ -195,8 +195,8 @@ export type Query_AllUsersMetaArgs = {
 };
 
 
-export type Query_KsListsMetaArgs = {
-  where?: InputMaybe<_KsListsMetaInput>;
+export type QueryKsListsMetaArgs = {
+  where?: InputMaybe<KsListsMetaInput>;
 };
 
 
@@ -394,7 +394,7 @@ export type UsersUpdateInput = {
   id: Scalars['ID'];
 };
 
-export type _ListAccess = {
+export type ListAccess = {
   __typename?: '_ListAccess';
   /**
    * Access Control settings for the currently logged in (or anonymous)
@@ -426,7 +426,7 @@ export type _ListAccess = {
   update?: Maybe<Scalars['JSON']>;
 };
 
-export type _ListInputTypes = {
+export type ListInputTypes = {
   __typename?: '_ListInputTypes';
   /** Create mutation input type name */
   createInput?: Maybe<Scalars['String']>;
@@ -442,10 +442,10 @@ export type _ListInputTypes = {
   whereUniqueInput?: Maybe<Scalars['String']>;
 };
 
-export type _ListMeta = {
+export type ListMeta = {
   __typename?: '_ListMeta';
   /** Access control configuration for the currently authenticated request */
-  access?: Maybe<_ListAccess>;
+  access?: Maybe<ListAccess>;
   /** The list's user-facing description */
   description?: Maybe<Scalars['String']>;
   /** The Keystone list key */
@@ -462,12 +462,12 @@ export type _ListMeta = {
   /** The list's plural display name */
   plural?: Maybe<Scalars['String']>;
   /** Information on the generated GraphQL schema */
-  schema?: Maybe<_ListSchema>;
+  schema?: Maybe<ListSchema>;
   /** The list's singular display name */
   singular?: Maybe<Scalars['String']>;
 };
 
-export type _ListMutations = {
+export type ListMutations = {
   __typename?: '_ListMutations';
   /** Create mutation name */
   create?: Maybe<Scalars['String']>;
@@ -483,7 +483,7 @@ export type _ListMutations = {
   updateMany?: Maybe<Scalars['String']>;
 };
 
-export type _ListQueries = {
+export type ListQueries = {
   __typename?: '_ListQueries';
   /** Single-item query name */
   item?: Maybe<Scalars['String']>;
@@ -493,34 +493,34 @@ export type _ListQueries = {
   meta?: Maybe<Scalars['String']>;
 };
 
-export type _ListSchema = {
+export type ListSchema = {
   __typename?: '_ListSchema';
   /** Information about fields defined on this list */
-  fields?: Maybe<Array<Maybe<_ListSchemaFields>>>;
+  fields?: Maybe<Array<Maybe<ListSchemaFields>>>;
   /** Top-level GraphQL input types */
-  inputTypes?: Maybe<_ListInputTypes>;
+  inputTypes?: Maybe<ListInputTypes>;
   /** Top-level GraphQL mutation names */
-  mutations?: Maybe<_ListMutations>;
+  mutations?: Maybe<ListMutations>;
   /**
    * Top level GraphQL query names which either return this type, or
    * provide aggregate information about this type
    */
-  queries?: Maybe<_ListQueries>;
+  queries?: Maybe<ListQueries>;
   /**
    * Information about fields on other types which return this type, or
    * provide aggregate information about this type
    */
-  relatedFields?: Maybe<Array<Maybe<_ListSchemaRelatedFields>>>;
+  relatedFields?: Maybe<Array<Maybe<ListSchemaRelatedFields>>>;
   /** The typename as used in GraphQL queries */
   type?: Maybe<Scalars['String']>;
 };
 
 
-export type _ListSchemaFieldsArgs = {
-  where?: InputMaybe<_ListSchemaFieldsInput>;
+export type ListSchemaFieldsArgs = {
+  where?: InputMaybe<ListSchemaFieldsInput>;
 };
 
-export type _ListSchemaFields = {
+export type ListSchemaFields = {
   __typename?: '_ListSchemaFields';
   /**
    * The name of the field in its list
@@ -533,11 +533,11 @@ export type _ListSchemaFields = {
   type?: Maybe<Scalars['String']>;
 };
 
-export type _ListSchemaFieldsInput = {
+export type ListSchemaFieldsInput = {
   type?: InputMaybe<Scalars['String']>;
 };
 
-export type _ListSchemaRelatedFields = {
+export type ListSchemaRelatedFields = {
   __typename?: '_ListSchemaRelatedFields';
   /** A list of GraphQL field names */
   fields?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -545,12 +545,12 @@ export type _ListSchemaRelatedFields = {
   type?: Maybe<Scalars['String']>;
 };
 
-export type _QueryMeta = {
+export type QueryMeta = {
   __typename?: '_QueryMeta';
   count?: Maybe<Scalars['Int']>;
 };
 
-export type _KsListsMetaInput = {
+export type KsListsMetaInput = {
   /** Whether this is an auxiliary helper list */
   auxiliary?: InputMaybe<Scalars['Boolean']>;
   key?: InputMaybe<Scalars['String']>;
@@ -573,15 +573,18 @@ export type UnauthenticateUserOutput = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
-export type All_ScoresQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllScoresQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+  sortBy?: InputMaybe<Array<SortScoresBy> | SortScoresBy>;
+}>;
 
 
-export type All_ScoresQuery = { __typename?: 'Query', allScores?: Array<{ __typename?: 'Score', id?: string | null, score?: number | null, player?: { __typename?: 'User', id?: string | null, name?: string | null } | null } | null> | null };
+export type AllScoresQuery = { __typename?: 'Query', allScores?: Array<{ __typename?: 'Score', id?: string | null, score?: number | null, player?: { __typename?: 'User', id?: string | null, name?: string | null } | null } | null> | null };
 
 
-export const All_ScoresDocument = gql`
-    query ALL_SCORES {
-  allScores(first: 10, sortBy: score_DESC) {
+export const AllScoresDocument = gql`
+    query ALL_SCORES($first: Int, $sortBy: [SortScoresBy!]) {
+  allScores(first: $first, sortBy: $sortBy) {
     id
     player {
       id
@@ -593,28 +596,30 @@ export const All_ScoresDocument = gql`
     `;
 
 /**
- * __useAll_ScoresQuery__
+ * __useAllScoresQuery__
  *
- * To run a query within a React component, call `useAll_ScoresQuery` and pass it any options that fit your needs.
- * When your component renders, `useAll_ScoresQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useAllScoresQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllScoresQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAll_ScoresQuery({
+ * const { data, loading, error } = useAllScoresQuery({
  *   variables: {
+ *      first: // value for 'first'
+ *      sortBy: // value for 'sortBy'
  *   },
  * });
  */
-export function useAll_ScoresQuery(baseOptions?: Apollo.QueryHookOptions<All_ScoresQuery, All_ScoresQueryVariables>) {
+export function useAllScoresQuery(baseOptions?: Apollo.QueryHookOptions<AllScoresQuery, AllScoresQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<All_ScoresQuery, All_ScoresQueryVariables>(All_ScoresDocument, options);
+        return Apollo.useQuery<AllScoresQuery, AllScoresQueryVariables>(AllScoresDocument, options);
       }
-export function useAll_ScoresLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<All_ScoresQuery, All_ScoresQueryVariables>) {
+export function useAllScoresLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllScoresQuery, AllScoresQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<All_ScoresQuery, All_ScoresQueryVariables>(All_ScoresDocument, options);
+          return Apollo.useLazyQuery<AllScoresQuery, AllScoresQueryVariables>(AllScoresDocument, options);
         }
-export type All_ScoresQueryHookResult = ReturnType<typeof useAll_ScoresQuery>;
-export type All_ScoresLazyQueryHookResult = ReturnType<typeof useAll_ScoresLazyQuery>;
-export type All_ScoresQueryResult = Apollo.QueryResult<All_ScoresQuery, All_ScoresQueryVariables>;
+export type AllScoresQueryHookResult = ReturnType<typeof useAllScoresQuery>;
+export type AllScoresLazyQueryHookResult = ReturnType<typeof useAllScoresLazyQuery>;
+export type AllScoresQueryResult = Apollo.QueryResult<AllScoresQuery, AllScoresQueryVariables>;
