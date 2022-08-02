@@ -33,6 +33,7 @@ export function GameProvider({ children }: GameContextProps): ReactElement {
   const handleStartNewGame = useCallback(() => {
     setIsInitialStart(true)
     setCurrentScore(0)
+
     const newBoard: Board = [...Array(4).fill(null)].map(() =>
       Array(4).fill(null)
     )

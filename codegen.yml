@@ -1,0 +1,9 @@
+overwrite: true
+schema: "https://hiring-backend-2048.herokuapp.com/admin/api"
+documents: "./src/services/graphql/*.ts"
+generates:
+  src/generated/types.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
