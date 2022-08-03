@@ -1,13 +1,17 @@
 import Button from 'components/atoms/Button/Button'
+import Modal from 'components/atoms/Modal/Modal'
+import { useState } from 'react'
 
 import Loading from '../../components/atoms/Loading/Loading'
 import ListRanking from '../../domains/InitialPage/ListRanking/ListRanking'
+import RegistrationModal from '../../domains/InitialPage/RegistrationModal/RegistrationModal'
 import { SortScoresBy, useAllScoresQuery } from '../../generated/types'
 import classes from './InitialPage.module.scss'
 
 type InitialPageProps = {}
 
 export default function InitialPage({}: InitialPageProps): JSX.Element {
+  const [isRegisterModal, setIsRegisterModal] = useState(false)
   const { loading, data, error } = useAllScoresQuery({
     variables: {
       first: 10,
@@ -19,8 +23,8 @@ export default function InitialPage({}: InitialPageProps): JSX.Element {
       {loading && <Loading />}
       {data?.allScores && (
         <>
-          <h1>2048</h1>
-          <h2>Leaderboard</h2>
+          <h1 className={classes.h1}>2048</h1>
+          <h2 className={classes.h2}>Leaderboard</h2>
           <ListRanking scores={data.allScores} />
           <div className={classes.initialPageActions}>
             <Button
@@ -30,7 +34,7 @@ export default function InitialPage({}: InitialPageProps): JSX.Element {
               type="secondary"
             />
             <Button
-              onClick={console.log}
+              onClick={() => setIsRegisterModal(true)}
               className={classes.initialPageButton}
               title="Register"
             />
@@ -38,6 +42,10 @@ export default function InitialPage({}: InitialPageProps): JSX.Element {
           <p>Login or register to start game!</p>
         </>
       )}
+      <RegistrationModal
+        isRegisterModal={isRegisterModal}
+        setIsRegisterModal={setIsRegisterModal}
+      />
     </section>
   )
 }

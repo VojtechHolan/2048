@@ -1,6 +1,7 @@
 .initialPage {
   width: 100%;
   height: 100vh;
+  padding: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -16,4 +17,8 @@
 
 .initialPageButton {
   margin: 0 7px;
+}
+
+.h1, .h2 {
+  margin: 5px;
 }

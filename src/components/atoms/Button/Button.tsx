@@ -5,6 +5,7 @@ type ButtonProps = {
   onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
   type?: 'primary' | 'secondary'
   className?: string
+  loading?: boolean
 }
 
 export default function Button({
@@ -12,6 +13,7 @@ export default function Button({
   onClick,
   type = 'primary',
   className,
+  loading = false,
 }: ButtonProps): JSX.Element {
   const typeClass = type === 'primary' ? classes.primary : classes.secondary
 
@@ -20,7 +22,7 @@ export default function Button({
       className={`${classes.button} ${typeClass} ${className}`}
       onClick={onClick}
     >
-      {title}
+      {loading ? 'Loading...' : title}
     </button>
   )
 }
