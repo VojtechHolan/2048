@@ -1,0 +1,10 @@
+@import 'src/styles/variables';
+
+.alert {
+  width: 100%;
+  display: block;
+  padding: 12px 10px;
+  margin-top: 4px;
+  background-color: $hover-background-color;
+  color: #fff;
+}

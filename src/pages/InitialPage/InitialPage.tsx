@@ -1,19 +1,17 @@
 import Button from 'components/atoms/Button/Button'
-import Modal from 'components/atoms/Modal/Modal'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
+import Alert from '../../components/atoms/Alert/Alert'
 import Loading from '../../components/atoms/Loading/Loading'
 import ListRanking from '../../domains/InitialPage/ListRanking/ListRanking'
 import RegistrationModal from '../../domains/InitialPage/RegistrationModal/RegistrationModal'
 import { SortScoresBy, useAllScoresQuery } from '../../generated/types'
-import { useSnackBar } from '../../hooks/useSnackBar'
 import classes from './InitialPage.module.scss'
 
 type InitialPageProps = {}
 
 export default function InitialPage({}: InitialPageProps): JSX.Element {
   const [isRegisterModal, setIsRegisterModal] = useState(false)
-  const snackbar = useSnackBar()
   const { loading, data, error } = useAllScoresQuery({
     variables: {
       first: 10,
@@ -21,16 +19,10 @@ export default function InitialPage({}: InitialPageProps): JSX.Element {
     },
   })
 
-  // Display error if requerst failed
-  useEffect(() => {
-    if (error) {
-      snackbar('Oops something went wrong!')
-    }
-  }, [error])
-
   return (
     <section className={classes.initialPage}>
       {loading && <Loading />}
+      {error && <Alert message="Something went wrong :(" />}
       {data?.allScores && (
         <>
           <h1 className={classes.h1}>2048</h1>

@@ -3,6 +3,7 @@ import classes from './SnackBar.module.scss'
 
 type SnackBarProps = {}
 
+// We should solve different status od snack bar like Success, Info, Warning, Error, etc.
 export default function SnackBar({}: SnackBarProps): JSX.Element {
   const { snackBars } = useSnackBarContext()
 
