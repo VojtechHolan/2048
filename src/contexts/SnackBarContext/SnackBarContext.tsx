@@ -29,6 +29,8 @@ export function SnackBarProvider({
   }
 
   // Destroy snack bar after 5000 seconds
+  // We could add more options like delay, time, type etc.
+  // Code will be more complex to handle things above
   useEffect(() => {
     if (snackBars.length) {
       setTimeout(() => {

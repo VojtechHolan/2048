@@ -1,28 +1,24 @@
-import { UseFormReturn } from 'react-hook-form'
+import { SubmitHandler, UseFormReturn } from 'react-hook-form'
 import { emailRegex } from 'services/form/validations/email'
 
+import Button from '../../../../components/atoms/Button/Button'
 import Input from '../../../../components/atoms/Input/Input'
-import { RegistrationFormInputs } from '../types'
+import { LoginFormInputs } from '../types'
 
 type RegistrationFormProps = {
-  form: UseFormReturn<RegistrationFormInputs, RegistrationFormInputs>
+  form: UseFormReturn<LoginFormInputs, LoginFormInputs>
 }
 
-export default function RegistrationForm({
+export default function LoginForm({
   form,
 }: RegistrationFormProps): JSX.Element {
   const {
     register,
+    handleSubmit,
     formState: { errors },
   } = form
 
   const formRegistry = {
-    name: register('name', {
-      required: {
-        value: true,
-        message: 'This field is required',
-      },
-    }),
     email: register('email', {
       required: {
         value: true,
@@ -46,12 +42,8 @@ export default function RegistrationForm({
   }
 
   return (
+    // className={classes.registrationForm}
     <form>
-      <Input
-        placeholder="Enter name"
-        register={formRegistry.name}
-        error={errors.name?.message}
-      />
       <Input
         placeholder="Enter email"
         register={formRegistry.email}

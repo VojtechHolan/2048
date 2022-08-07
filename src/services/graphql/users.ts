@@ -9,3 +9,14 @@ export const createUser = gql`
     }
   }
 `
+
+export const authenticate = gql`
+  mutation AUTHENTICATE($email: String!, $password: String!) {
+    authenticateUserWithPassword(email: $email, password: $password) {
+      token
+      item {
+        name
+      }
+    }
+  }
+`

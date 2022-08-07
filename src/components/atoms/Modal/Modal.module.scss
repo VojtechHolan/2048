@@ -1,5 +1,7 @@
 @import 'src/styles/variables';
 
+$basic-padding: 20px;
+
 .modalWrapper {
   position: absolute;
   top: 0;
@@ -33,6 +35,17 @@
   }
 
   .body {
-    padding: 20px;
+    padding: $basic-padding;
   }
+
+  .footer {
+    padding: 0 $basic-padding $basic-padding $basic-padding;
+
+    .submitButton {
+      display: block;
+      margin-left: auto;
+    }
+  }
+
+
 }

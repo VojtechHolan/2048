@@ -1,4 +1,4 @@
-import { useSnackBarContext } from '../../../contexts/SnackBar/useSnackBarContext'
+import { useSnackBarContext } from '../../../contexts/SnackBarContext/useSnackBarContext'
 import classes from './SnackBar.module.scss'
 
 type SnackBarProps = {}

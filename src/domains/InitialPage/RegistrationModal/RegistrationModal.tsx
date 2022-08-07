@@ -8,12 +8,12 @@ import RegistrationForm from './RegistrationForm/RegistrationForm'
 import { RegistrationFormInputs } from './types'
 
 type RegistrationModalProps = {
-  isRegisterModal: boolean
+  isVisible: boolean
   onClose: () => void
 }
 
 export default function RegistrationModal({
-  isRegisterModal,
+  isVisible,
   onClose,
 }: RegistrationModalProps): JSX.Element {
   const snackbar = useSnackBar()
@@ -28,10 +28,15 @@ export default function RegistrationModal({
   const handleSubmit: SubmitHandler<RegistrationFormInputs> = async (
     registrationInput
   ) => {
+    const { email, name, password } = registrationInput
     try {
       await createUser({
         variables: {
-          data: registrationInput,
+          data: {
+            email,
+            name,
+            password,
+          },
         },
       })
       snackbar('User was successfully created!')
@@ -46,11 +51,13 @@ export default function RegistrationModal({
   return (
     <Modal
       title="Register Form"
-      isVisible={isRegisterModal}
+      isVisible={isVisible}
       onClose={() => handleClose()}
       width="450px"
+      loading={loading}
+      onSubmit={form.handleSubmit(handleSubmit)}
     >
-      <RegistrationForm form={form} onSubmit={handleSubmit} loading={loading} />
+      <RegistrationForm form={form} />
     </Modal>
   )
 }

@@ -1,4 +1,4 @@
-import { useSnackBarContext } from '../contexts/SnackBar/useSnackBarContext'
+import { useSnackBarContext } from '../contexts/SnackBarContext/useSnackBarContext'
 
 export const useSnackBar = (): ((message: string) => void) => {
   const { push } = useSnackBarContext()

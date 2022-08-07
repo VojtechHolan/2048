@@ -1,14 +1,18 @@
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { createPortal } from 'react-dom'
 
+import Button from '../Button/Button'
 import classes from './Modal.module.scss'
 
 type ModalProps = {
   title: string
   children: ReactElement | ReactElement[]
   isVisible: boolean
-  onClose: () => void
+  onClose?: () => void
   width?: string
+  submitButtonText?: string
+  onSubmit?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  loading?: boolean
 }
 
 // We could add footer section to modal
@@ -18,6 +22,9 @@ export default function Modal({
   title,
   onClose,
   width = '90%',
+  submitButtonText = 'Submit',
+  onSubmit,
+  loading = false,
 }: ModalProps): JSX.Element | null {
   if (isVisible) {
     return createPortal(
@@ -25,11 +32,23 @@ export default function Modal({
         <div className={classes.modal} style={{ width }}>
           <div className={classes.header}>
             <h2 className={classes.title}>{title}</h2>
-            <span className={classes.closeIcon} onClick={() => onClose()}>
-              X
-            </span>
+            {onClose && (
+              <span className={classes.closeIcon} onClick={() => onClose()}>
+                X
+              </span>
+            )}
           </div>
           <div className={classes.body}>{children}</div>
+          {onSubmit && (
+            <div className={classes.footer}>
+              <Button
+                className={classes.submitButton}
+                onClick={onSubmit}
+                title={submitButtonText}
+                loading={loading}
+              />
+            </div>
+          )}
         </div>
       </section>,
       document.body

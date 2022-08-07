@@ -5,15 +5,18 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
-import { SnackBarProvider } from './contexts/SnackBar/SnackBarContext'
+import { AuthProvider } from './contexts/AuthContext/AuthContext'
+import { SnackBarProvider } from './contexts/SnackBarContext/SnackBarContext'
 import { client } from './services/apollo'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <SnackBarProvider>
-        <App />
-      </SnackBarProvider>
+      <AuthProvider>
+        <SnackBarProvider>
+          <App />
+        </SnackBarProvider>
+      </AuthProvider>
     </ApolloProvider>
   </React.StrictMode>
 )

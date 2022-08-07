@@ -11,7 +11,11 @@ function App(): JSX.Element {
   return (
     <>
       <div className={classes.app}>
-        {isGameRunning ? <GamePage /> : <InitialPage />}
+        {isGameRunning ? (
+          <GamePage />
+        ) : (
+          <InitialPage onGameStart={() => setIsGameRunning(true)} />
+        )}
       </div>
       <SnackBar />
     </>
