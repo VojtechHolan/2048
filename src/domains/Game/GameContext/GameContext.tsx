@@ -3,6 +3,7 @@ import {
   ReactElement,
   useCallback,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 import { getRandomNumberFromRange } from 'services/random'
@@ -21,6 +22,7 @@ export interface GameProviderType {
   handleChange: (direction: Direction) => void
   isInitialStart: boolean
   currentScore: number
+  registerNotifyEndOfGame: (cb: (score: number) => void) => void
 }
 
 export const GameContext = createContext<GameProviderType | null>(null)
@@ -29,6 +31,7 @@ export function GameProvider({ children }: GameContextProps): ReactElement {
   const [board, setBoard] = useState<Board | null>(null)
   const [isInitialStart, setIsInitialStart] = useState<boolean>(false)
   const [currentScore, setCurrentScore] = useState<number>(0)
+  const notifyEndOfGameRef = useRef<(score: number) => void>()
 
   const handleStartNewGame = useCallback(() => {
     setIsInitialStart(true)
@@ -53,6 +56,18 @@ export function GameProvider({ children }: GameContextProps): ReactElement {
     setBoard(newBoard)
   }, [])
 
+  const registerNotifyEndOfGame = useCallback(
+    (cb: (score: number) => void): void => {
+      // Currently I support to register only one notification
+      // For future we could create array of all registration (including unsubscribe etc.)
+      notifyEndOfGameRef.current = cb
+    },
+    []
+  )
+
+  const notifyEndOfGame = (score: number): void =>
+    notifyEndOfGameRef.current?.(score)
+
   const handleChange = (direction: Direction): void => {
     if (board) {
       // Generate new board
@@ -61,6 +76,7 @@ export function GameProvider({ children }: GameContextProps): ReactElement {
       // Find out if user lose
       if (isEndOfGame(newBoard)) {
         setBoard(null)
+        notifyEndOfGame(currentScore)
       } else {
         setBoard(newBoard)
         setCurrentScore((prev) => prev + score)
@@ -82,6 +98,7 @@ export function GameProvider({ children }: GameContextProps): ReactElement {
       handleChange,
       isInitialStart,
       currentScore,
+      registerNotifyEndOfGame,
     }),
     [handleStartNewGame, board, handleChange, isInitialStart, currentScore]
   )

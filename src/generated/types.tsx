@@ -581,6 +581,13 @@ export type AllScoresQueryVariables = Exact<{
 
 export type AllScoresQuery = { __typename?: 'Query', allScores?: Array<{ __typename?: 'Score', id?: string | null, score?: number | null, player?: { __typename?: 'User', id?: string | null, name?: string | null } | null } | null> | null };
 
+export type AddScoreMutationVariables = Exact<{
+  data: ScoreCreateInput;
+}>;
+
+
+export type AddScoreMutation = { __typename?: 'Mutation', createScore?: { __typename?: 'Score', id?: string | null, score?: number | null, player?: { __typename?: 'User', id?: string | null, name?: string | null } | null } | null };
+
 export type CreateUserMutationVariables = Exact<{
   data?: InputMaybe<UserCreateInput>;
 }>;
@@ -638,6 +645,44 @@ export function useAllScoresLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type AllScoresQueryHookResult = ReturnType<typeof useAllScoresQuery>;
 export type AllScoresLazyQueryHookResult = ReturnType<typeof useAllScoresLazyQuery>;
 export type AllScoresQueryResult = Apollo.QueryResult<AllScoresQuery, AllScoresQueryVariables>;
+export const AddScoreDocument = gql`
+    mutation ADD_SCORE($data: ScoreCreateInput!) {
+  createScore(data: $data) {
+    id
+    player {
+      id
+      name
+    }
+    score
+  }
+}
+    `;
+export type AddScoreMutationFn = Apollo.MutationFunction<AddScoreMutation, AddScoreMutationVariables>;
+
+/**
+ * __useAddScoreMutation__
+ *
+ * To run a mutation, you first call `useAddScoreMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddScoreMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addScoreMutation, { data, loading, error }] = useAddScoreMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useAddScoreMutation(baseOptions?: Apollo.MutationHookOptions<AddScoreMutation, AddScoreMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddScoreMutation, AddScoreMutationVariables>(AddScoreDocument, options);
+      }
+export type AddScoreMutationHookResult = ReturnType<typeof useAddScoreMutation>;
+export type AddScoreMutationResult = Apollo.MutationResult<AddScoreMutation>;
+export type AddScoreMutationOptions = Apollo.BaseMutationOptions<AddScoreMutation, AddScoreMutationVariables>;
 export const CreateUserDocument = gql`
     mutation CREATE_USER($data: UserCreateInput) {
   createUser(data: $data) {

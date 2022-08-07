@@ -12,3 +12,16 @@ export const allScores = gql`
     }
   }
 `
+
+export const addScore = gql`
+  mutation ADD_SCORE($data: ScoreCreateInput!) {
+    createScore(data: $data) {
+      id
+      player {
+        id
+        name
+      }
+      score
+    }
+  }
+`

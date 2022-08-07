@@ -2,8 +2,9 @@
 
 .notifications {
   position: fixed;
-  right: 5px;
-  bottom: 5px;
+  left: 50%;
+  bottom: 15px;
+  transform: translateX(-50%);
 }
 
 .message {
