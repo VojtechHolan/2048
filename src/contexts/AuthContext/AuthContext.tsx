@@ -1,6 +1,5 @@
 import { createContext, ReactElement, useMemo, useState } from 'react'
 
-import { token } from '../../services/apollo'
 import {
   resetTokenForApollo,
   setTokenForApollo,
