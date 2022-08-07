@@ -1,27 +1,27 @@
 import { Dispatch } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import Button from '../../../components/atoms/Button/Button'
-import Input from '../../../components/atoms/Input/Input'
 import Modal from '../../../components/atoms/Modal/Modal'
 import { useCreateUserMutation } from '../../../generated/types'
+import { useSnackBar } from '../../../hooks/useSnackBar'
 import RegistrationForm from './RegistrationForm/RegistrationForm'
 import { RegistrationFormInputs } from './types'
 
 type RegistrationModalProps = {
   isRegisterModal: boolean
-  setIsRegisterModal: Dispatch<boolean>
+  onClose: () => void
 }
 
 export default function RegistrationModal({
   isRegisterModal,
-  setIsRegisterModal,
+  onClose,
 }: RegistrationModalProps): JSX.Element {
+  const snackbar = useSnackBar()
   const [createUser, { loading }] = useCreateUserMutation()
   const form = useForm<RegistrationFormInputs>()
 
   const handleClose = (): void => {
-    setIsRegisterModal(false)
+    onClose()
     form.reset()
   }
 
@@ -34,9 +34,9 @@ export default function RegistrationModal({
           data: registrationInput,
         },
       })
-      // We should display snackbar...
+      snackbar('User was successfully created!')
     } catch (e) {
-      // We should display snackbar...
+      snackbar('Oops something went wrong :(')
       console.error(e)
     } finally {
       handleClose()

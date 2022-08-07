@@ -1,0 +1,15 @@
+@import 'src/styles/variables';
+
+.notifications {
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+}
+
+.message {
+  display: block;
+  padding: 12px 10px;
+  margin-top: 4px;
+  background-color: $hover-background-color;
+  color: #fff;
+}

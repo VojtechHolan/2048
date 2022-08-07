@@ -1,3 +1,4 @@
+import SnackBar from 'components/atoms/SnackBar/SnackBar'
 import GamePage from 'pages/GamePage/GamePage'
 import { useState } from 'react'
 
@@ -8,9 +9,12 @@ function App(): JSX.Element {
   const [isGameRunning, setIsGameRunning] = useState(false)
 
   return (
-    <div className={classes.app}>
-      {isGameRunning ? <GamePage /> : <InitialPage />}
-    </div>
+    <>
+      <div className={classes.app}>
+        {isGameRunning ? <GamePage /> : <InitialPage />}
+      </div>
+      <SnackBar />
+    </>
   )
 }
 
