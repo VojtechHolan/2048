@@ -89,7 +89,9 @@ export default function Board({ board }: BoardProps): JSX.Element {
 
   return (
     <section className={classes.board}>
-      {board?.finished && <h2>You lose :( Click start game!</h2>}
+      {board?.finished && (
+        <h2 className={classes.title}>You lose :( Click start game!</h2>
+      )}
       {!board?.finished && (
         <div className={classes.boxes}>
           {state?.map((line) =>
