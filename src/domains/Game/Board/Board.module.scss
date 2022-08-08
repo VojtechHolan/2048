@@ -1,5 +1,12 @@
 $box-size: 110px;
 $gap-box-size: 10px;
+$game-size: 500px;
+
+$small-box-size: 65px;
+$small-gap-box-size: 10px;
+$small-game-size: 320px;
+
+$small-resolution: 560px;
 
 .board {
   width: 500px;
@@ -10,6 +17,11 @@ $gap-box-size: 10px;
   align-items: center;
   background-color: #bbada0;
   border-radius: 6px;
+
+  @media (max-width: $small-resolution) {
+    width: $small-game-size;
+    height: $small-game-size;
+  }
 }
 
 .boxes {
@@ -20,4 +32,11 @@ $gap-box-size: 10px;
   row-gap: $gap-box-size;
   width: 100%;
   height: 100%;
+
+  @media (max-width: $small-resolution) {
+    grid-template-columns: $small-box-size $small-box-size $small-box-size $small-box-size;
+    grid-template-rows: $small-box-size $small-box-size $small-box-size $small-box-size;
+    column-gap: $small-gap-box-size;
+    row-gap: $small-gap-box-size;
+  }
 }
