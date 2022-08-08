@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { createPortal } from 'react-dom'
 
-import Button from '../Button/Button'
+import Button from '../../atoms/Button/Button'
 import classes from './Modal.module.scss'
 
 type ModalProps = {

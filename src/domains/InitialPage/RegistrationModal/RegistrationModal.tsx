@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import Modal from '../../../components/atoms/Modal/Modal'
+import Modal from '../../../components/molecules/Modal/Modal'
 import { useCreateUserMutation } from '../../../generated/types'
 import { useSnackBar } from '../../../hooks/useSnackBar'
 import RegistrationForm from './RegistrationForm/RegistrationForm'

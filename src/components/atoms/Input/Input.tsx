@@ -10,6 +10,7 @@ type InputProps = {
   error?: string | null
 }
 
+// Input is prepared only for react-hook-form
 export default function Input({
   register,
   type,

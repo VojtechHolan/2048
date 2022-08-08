@@ -20,9 +20,9 @@ type BoardProps = {
 
 export default function Board({ board }: BoardProps): JSX.Element {
   const [addScore] = useAddScoreMutation()
-  const snackbar = useSnackBar()
   const [processGame] = useProcessGameMutation()
-  const { state, score } = board || {}
+  const snackbar = useSnackBar()
+  const { state, score, finished } = board || {}
 
   const handleEndOfTheGame = async (score: number): Promise<void> => {
     try {
@@ -85,7 +85,7 @@ export default function Board({ board }: BoardProps): JSX.Element {
       console.error(e)
     }
   }
-  useArrowsControl(handleChange, !board?.finished)
+  useArrowsControl(handleChange, !finished)
 
   return (
     <section className={classes.board}>

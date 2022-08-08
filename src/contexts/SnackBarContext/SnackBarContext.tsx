@@ -32,14 +32,22 @@ export function SnackBarProvider({
   // We could add more options like delay, time, type etc.
   // Code will be more complex to handle things above
   useEffect(() => {
+    let timeout: NodeJS.Timeout | null = null
+
     if (snackBars.length) {
-      setTimeout(() => {
+      timeout = setTimeout(() => {
         setSnackBars((prev) => {
           const copy = [...prev]
           copy.shift()
           return copy
         })
       }, 5000)
+    }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout)
+      }
     }
   }, [snackBars])
 
