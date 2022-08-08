@@ -7,7 +7,6 @@ import { useSnackBar } from '../../../hooks/useSnackBar'
 import Box from '../Box/Box'
 import { useGameContext } from '../GameContext/useGameContext'
 import classes from './Board.module.scss'
-import BoardTitle from './BoardTitle/BoardTitle'
 
 export default function Board(): JSX.Element {
   const [addScore] = useAddScoreMutation()
@@ -40,7 +39,9 @@ export default function Board(): JSX.Element {
 
   return (
     <section className={classes.board}>
-      {board == null && <BoardTitle />}
+      {board == null && (
+        <h2 className={classes.title}>You lose :( Click start game!</h2>
+      )}
       {board != null && (
         <div className={classes.boxes}>
           {board.map((line) =>
