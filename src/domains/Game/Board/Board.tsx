@@ -62,12 +62,7 @@ export default function Board({ board }: BoardProps): JSX.Element {
           score: newScore,
           finished: newFinished,
           state: newState,
-          finished,
         } = result.data?.processGame || {}
-
-        if (finished) {
-          await handleEndOfTheGame(newScore || 0)
-        }
 
         // Update cache
         client.writeQuery({
@@ -81,6 +76,10 @@ export default function Board({ board }: BoardProps): JSX.Element {
             },
           },
         })
+
+        if (newFinished) {
+          await handleEndOfTheGame(newScore || 0)
+        }
       }
     } catch (e) {
       snackbar('Oops something went wrong!')
