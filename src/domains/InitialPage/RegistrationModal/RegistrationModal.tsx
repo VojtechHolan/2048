@@ -1,4 +1,3 @@
-import { Dispatch } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Modal from '../../../components/atoms/Modal/Modal'
