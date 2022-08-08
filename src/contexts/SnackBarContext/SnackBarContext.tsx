@@ -26,30 +26,18 @@ export function SnackBarProvider({
 
   const push = (message: string): void => {
     setSnackBars((prev) => [...prev, { message }])
+
+    // Destroy snack bar after 5000 seconds
+    // We could add more options like delay, time, type etc.
+    // Code will be more complex to handle things as creating ids for snackbar etc.
+    setTimeout(() => {
+      setSnackBars((prev) => {
+        const copy = [...prev]
+        copy.shift()
+        return copy
+      })
+    }, 5000)
   }
-
-  // Destroy snack bar after 5000 seconds
-  // We could add more options like delay, time, type etc.
-  // Code will be more complex to handle things above
-  useEffect(() => {
-    let timeout: NodeJS.Timeout | null = null
-
-    if (snackBars.length) {
-      timeout = setTimeout(() => {
-        setSnackBars((prev) => {
-          const copy = [...prev]
-          copy.shift()
-          return copy
-        })
-      }, 5000)
-    }
-
-    return () => {
-      if (timeout) {
-        clearTimeout(timeout)
-      }
-    }
-  }, [snackBars])
 
   const value = useMemo(
     () => ({
