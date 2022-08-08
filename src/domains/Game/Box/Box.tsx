@@ -11,7 +11,7 @@ export default function Box({ children }: BoxProps): JSX.Element {
       className={classes.box}
       style={{ backgroundColor: getBoxColor(children) }}
     >
-      {children}
+      {children === 0 ? null : children}
     </span>
   )
 }

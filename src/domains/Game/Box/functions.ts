@@ -6,6 +6,8 @@ export const getBoxColor = (value: number | null): string => {
   switch (value) {
     case null:
       return '#cdc1b4'
+    case 0:
+      return '#cdc1b4'
     case 2:
       return '#755C48'
     case 4:

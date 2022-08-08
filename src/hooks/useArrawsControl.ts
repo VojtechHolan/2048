@@ -1,18 +1,18 @@
 import { useEffect } from 'react'
 
-import { Direction } from '../enums/Directive'
+import { ArrowKeysDirection } from '../enums/Directive'
 
 export const useArrowsControl = (
-  onKeyDown: (key: Direction) => void,
-  active = false
+  onKeyDown: (key: ArrowKeysDirection) => void,
+  active = true
 ): void => {
   const handleKeyDown = (event: KeyboardEvent): void => {
     const { key } = event
     if (
-      key === Direction.LEFT ||
-      key === Direction.RIGHT ||
-      key === Direction.UP ||
-      key === Direction.DOWN
+      key === ArrowKeysDirection.LEFT ||
+      key === ArrowKeysDirection.RIGHT ||
+      key === ArrowKeysDirection.UP ||
+      key === ArrowKeysDirection.DOWN
     ) {
       onKeyDown(key)
     }

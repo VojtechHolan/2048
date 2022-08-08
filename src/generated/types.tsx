@@ -573,6 +573,18 @@ export type UnauthenticateUserOutput = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+export type NewGameQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NewGameQuery = { __typename?: 'Query', newGame?: { __typename?: 'Game', state: Array<Array<number>>, score: number, finished: boolean } | null };
+
+export type ProcessGameMutationVariables = Exact<{
+  game: GameInput;
+}>;
+
+
+export type ProcessGameMutation = { __typename?: 'Mutation', processGame?: { __typename?: 'Game', state: Array<Array<number>>, score: number, finished: boolean } | null };
+
 export type AllScoresQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
   sortBy?: InputMaybe<Array<SortScoresBy> | SortScoresBy>;
@@ -604,6 +616,77 @@ export type AuthenticateMutationVariables = Exact<{
 export type AuthenticateMutation = { __typename?: 'Mutation', authenticateUserWithPassword?: { __typename?: 'authenticateUserOutput', token?: string | null, item?: { __typename?: 'User', name?: string | null } | null } | null };
 
 
+export const NewGameDocument = gql`
+    query NEW_GAME {
+  newGame {
+    state
+    score
+    finished
+  }
+}
+    `;
+
+/**
+ * __useNewGameQuery__
+ *
+ * To run a query within a React component, call `useNewGameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useNewGameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNewGameQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useNewGameQuery(baseOptions?: Apollo.QueryHookOptions<NewGameQuery, NewGameQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<NewGameQuery, NewGameQueryVariables>(NewGameDocument, options);
+      }
+export function useNewGameLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NewGameQuery, NewGameQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<NewGameQuery, NewGameQueryVariables>(NewGameDocument, options);
+        }
+export type NewGameQueryHookResult = ReturnType<typeof useNewGameQuery>;
+export type NewGameLazyQueryHookResult = ReturnType<typeof useNewGameLazyQuery>;
+export type NewGameQueryResult = Apollo.QueryResult<NewGameQuery, NewGameQueryVariables>;
+export const ProcessGameDocument = gql`
+    mutation PROCESS_GAME($game: GameInput!) {
+  processGame(game: $game) {
+    state
+    score
+    finished
+  }
+}
+    `;
+export type ProcessGameMutationFn = Apollo.MutationFunction<ProcessGameMutation, ProcessGameMutationVariables>;
+
+/**
+ * __useProcessGameMutation__
+ *
+ * To run a mutation, you first call `useProcessGameMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useProcessGameMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [processGameMutation, { data, loading, error }] = useProcessGameMutation({
+ *   variables: {
+ *      game: // value for 'game'
+ *   },
+ * });
+ */
+export function useProcessGameMutation(baseOptions?: Apollo.MutationHookOptions<ProcessGameMutation, ProcessGameMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ProcessGameMutation, ProcessGameMutationVariables>(ProcessGameDocument, options);
+      }
+export type ProcessGameMutationHookResult = ReturnType<typeof useProcessGameMutation>;
+export type ProcessGameMutationResult = Apollo.MutationResult<ProcessGameMutation>;
+export type ProcessGameMutationOptions = Apollo.BaseMutationOptions<ProcessGameMutation, ProcessGameMutationVariables>;
 export const AllScoresDocument = gql`
     query ALL_SCORES($first: Int, $sortBy: [SortScoresBy!]) {
   allScores(first: $first, sortBy: $sortBy) {
