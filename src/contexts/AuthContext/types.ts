@@ -3,4 +3,7 @@ export type User = {
   name: string
 }
 
-export const defaultUser = { token: null, name: '' }
+export const defaultUser = {
+  token: null,
+  name: '',
+}

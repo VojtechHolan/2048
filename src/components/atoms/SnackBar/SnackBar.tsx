@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid'
+
 import { useSnackBarContext } from '../../../contexts/SnackBarContext/useSnackBarContext'
 import classes from './SnackBar.module.scss'
 
@@ -8,7 +10,9 @@ export default function SnackBar(): JSX.Element {
   return (
     <aside className={classes.notifications}>
       {snackBars.map((snackbar) => (
-        <span className={classes.message}>{snackbar.message}</span>
+        <span className={classes.message} key={uuid()}>
+          {snackbar.message}
+        </span>
       ))}
     </aside>
   )

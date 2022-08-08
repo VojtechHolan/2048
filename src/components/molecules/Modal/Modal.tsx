@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { createPortal } from 'react-dom'
 
-import Button from '../Button/Button'
+import Button from '../../atoms/Button/Button'
 import classes from './Modal.module.scss'
 
 type ModalProps = {
@@ -30,24 +30,24 @@ export default function Modal({
     return createPortal(
       <section className={classes.modalWrapper}>
         <div className={classes.modal} style={{ width }}>
-          <div className={classes.header}>
+          <header className={classes.header}>
             <h2 className={classes.title}>{title}</h2>
             {onClose && (
               <span className={classes.closeIcon} onClick={() => onClose()}>
                 X
               </span>
             )}
-          </div>
+          </header>
           <div className={classes.body}>{children}</div>
           {onSubmit && (
-            <div className={classes.footer}>
+            <footer className={classes.footer}>
               <Button
                 className={classes.submitButton}
                 onClick={onSubmit}
                 title={submitButtonText}
                 loading={loading}
               />
-            </div>
+            </footer>
           )}
         </div>
       </section>,
