@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactElement,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { createContext, ReactElement, useMemo, useState } from 'react'
 
 type SnackBarContextProps = {
   children: ReactElement | ReactElement[]
