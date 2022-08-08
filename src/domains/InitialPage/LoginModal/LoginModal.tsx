@@ -1,12 +1,8 @@
-import { Dispatch } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import Modal from '../../../components/atoms/Modal/Modal'
 import { useAuthContext } from '../../../contexts/AuthContext/useAuthContext'
-import {
-  useAuthenticateMutation,
-  useCreateUserMutation,
-} from '../../../generated/types'
+import { useAuthenticateMutation } from '../../../generated/types'
 import { useSnackBar } from '../../../hooks/useSnackBar'
 import LoginForm from './LoginForm/LoginForm'
 import { LoginFormInputs } from './types'

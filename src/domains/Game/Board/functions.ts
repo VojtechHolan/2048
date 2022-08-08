@@ -1,4 +1,4 @@
-import { ArrowKeysDirection } from '../../../enums/Directive'
+import { ArrowKeysDirection } from '../../../enums/arrowKeysDirection'
 import { Direction } from '../../../generated/types'
 
 export function translateArrowKeysDirectionToDirection(

@@ -1,3 +1,6 @@
 *.css
 *.svg
 *.scss
+generated/
+node_modules/
+vite.config.ts

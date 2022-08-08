@@ -1,7 +1,6 @@
-import { SubmitHandler, UseFormReturn } from 'react-hook-form'
+import { UseFormReturn } from 'react-hook-form'
 import { emailRegex } from 'services/form/validations/email'
 
-import Button from '../../../../components/atoms/Button/Button'
 import Input from '../../../../components/atoms/Input/Input'
 import { LoginFormInputs } from '../types'
 
@@ -14,7 +13,6 @@ export default function LoginForm({
 }: RegistrationFormProps): JSX.Element {
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = form
 

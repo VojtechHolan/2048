@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { ArrowKeysDirection } from '../enums/Directive'
+import { ArrowKeysDirection } from '../enums/arrowKeysDirection'
 
 export const useArrowsControl = (
   onKeyDown: (key: ArrowKeysDirection) => void,
