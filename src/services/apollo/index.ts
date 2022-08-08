@@ -8,6 +8,8 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
+  // In real app we would use cookie
+  // For my solution user is signed in until referesh page
   const token = getTokenForApollo()
   return {
     headers: {
